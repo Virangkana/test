@@ -34,8 +34,8 @@
             zoomControl:true, maxZoom:28, minZoom:1
         }).fitBounds([[6.709225914192505,97.35921874069182],[9.829083106989408,103.58886142108818]]);
 
-  /* Control panel to display map layers */
-  var controlLayers = L.control.layers( terrain, light, {
+    /* Control panel to display map layers */
+  var controlLayers = L.control.layers( terrain, light, Global Forest Watch, {
     position: "topright",
     collapsed: true ,
   }).addTo(map);
@@ -54,6 +54,11 @@
   }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
   controlLayers.addBaseLayer(light, 'Satellite');
 
+
+  var globalforest2020 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
+  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+  controlLayers.addBaseLayer(light, 'Global Forest 2020');
 
 
 
