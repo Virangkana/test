@@ -39,28 +39,19 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-              var controlLayers = L.control.layers( layer_googlemap_0, layer_Globalforestcover2020_1, {
+    var controlLayers = L.control.layers( layer_googlemap, layer_Globalforestcover2020, {
     position: "topright",
     collapsed: true ,
   }).addTo(map);
- 
-        map.createPane('pane_googlemap_0');
-        map.getPane('pane_googlemap_0').style.zIndex = 400;
-        var layer_googlemap_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            pane: 'pane_googlemap_0',
-            opacity: 1.0,
-            attribution: '',
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 18
-        });
-        layer_googlemap_0;
-        map.addLayer(layer_googlemap_0);
-        map.createPane('pane_Globalforestcover2020_1');
-        map.getPane('pane_Globalforestcover2020_1').style.zIndex = 401;
-        var layer_Globalforestcover2020_1 = L.WMS.layer("https://ies-ows.jrc.ec.europa.eu/iforce/gfc2020/wms.py", "gfc2020", {
-            pane: 'pane_Globalforestcover2020_1',
+  /* Stamen colored  basemap tiles with labels */
+  var layer_googlemap = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}'', {
+      attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
+  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+  controlLayers.addBaseLayer(layer_googlemap, 'Satellite');
+
+   
+        var layer_Globalforestcover2020 =  L.WMS.layer("https://ies-ows.jrc.ec.europa.eu/iforce/gfc2020/wms.py", "gfc2020", {
+            pane: 'pane_Globalforestcover2020_2',
             format: 'image/png',
             uppercase: true,
             transparent: true,
@@ -70,8 +61,9 @@
             opacity: 1,
             attribution: '',
         });
-        map.addLayer(layer_Globalforestcover2020_1);
-        setBounds();
+        
+        }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+  controlLayers.addBaseLayer(layer_Globalforestcover2020, 'global forest watch');
         </script>
     </body>
 </html>
