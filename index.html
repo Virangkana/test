@@ -30,23 +30,34 @@
 
 
   // Set up initial map center and zoom level
-  var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[6.709225914192505,97.35921874069182],[9.829083106989408,103.58886142108818]]);
 
+
+    var ggm = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+       maxZoom: 19,
+    attribution: '© GoogleMap'
+      });
+      var map = L.map('map', {
+   center: [8.9352, 98.9014], // EDIT latitude, longitude to re-center map
+    zoom: 15,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
+    scrollWheelZoom: true,
+    tap: false
+    layers: [ggm, global]
+});
+    var baseMaps = {
+    "GoogleMap": ggm,
+    
+};
+
+var overlayMaps = {
+    "Global": Global
+};
+   
     /* Control panel to display map layers */
-  var controlLayers = L.control.layers( terrain, light, globalforest2020, {
-    position: "topright",
-    collapsed: true ,
-  }).addTo(map);
+ var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
  
   
-  /* Stamen colored terrain basemap tiles with labels */
-  var terrain = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-  }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-  controlLayers.addBaseLayer(terrain, 'map');
-    
+
+
     // display Carto basemap tiles with light features and labels//
     
   var light = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
