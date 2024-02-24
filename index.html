@@ -29,15 +29,13 @@
   <script>
 
   // Set up initial map center and zoom level
-    var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[6.709225914192505,97.35921874069182],[9.829083106989408,103.58886142108818]]);
-        var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-        }});
+  // Set up initial map center and zoom level
+  var map = L.map('map', {
+    center: [8.9352, 98.9014], // EDIT latitude, longitude to re-center map
+    zoom: 15,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
+    scrollWheelZoom: true,
+    tap: false
+  });
 
   /* Control panel to display map layers */
   var controlLayers = L.control.layers( terrain, light, {
