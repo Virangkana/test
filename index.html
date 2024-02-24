@@ -48,67 +48,9 @@
     
 };
 
-var overlayMaps = {
-    "Global": Global
-};
-   
-    /* Control panel to display map layers */
- var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
  
   
-
-
-    // display Carto basemap tiles with light features and labels//
-    
-  var light = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-    attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
-  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-  controlLayers.addBaseLayer(light, 'Satellite');
-
-
-  var globalforest2020 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-    attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
-  }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-  controlLayers.addBaseLayer(globalforest2020, 'Global Forest 2020');
-
-
-
-
-
-   
-
-     
-  // see more basemap options at https://leaflet-extras.github.io/leaflet-providers/preview/
-
-   
-  // Read markers data from data.csv
-    $.get('./location นส.4จ - Sheet2 (1).csv', function(csvString) {
-
-    // Use PapaParse to convert string to array of objects
-    var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
-
-    // For each row in data, create a marker and add it to the map
-    // For each row, columns `lat`, `long` ,  `Name` are required
-    for (var i in data) {
-      var row = data[i];
-      var detail = row.Name  ;
-        
-
-      var marker = L.marker([row.lat, row.long], {
-        opacity: 1
-        
-       
-      }).bindPopup(detail);
-      
-      marker.addTo(map);
-    }
- 
-  });
-
- 
-  map.attributionControl.setPrefix(
-    'View <a href="https://github.com/" target="_blank">code on GitHub</a>'
-  );
 
   </script>
 </body>
