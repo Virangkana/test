@@ -30,40 +30,34 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet.wms.js"></script>
         <script>
-        var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[7.628773000448205,95.38331366967046],[10.740983383816483,101.61295635006682]]);
-        var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
-        var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-        }
-    var controlLayers = L.control.layers( layer_googlemap, layer_Globalforestcover2020, {
+         // Set up initial map center and zoom level
+  var map = L.map('map', {
+    center: [8.9352, 98.9014], // EDIT latitude, longitude to re-center map
+    zoom: 15,  // EDIT from 1 to 18 -- decrease to zoom out, increase to zoom in
+    scrollWheelZoom: true,
+    tap: false
+  });
+
+  /* Control panel to display map layers */
+  var controlLayers = L.control.layers( terrain, light, {
     position: "topright",
     collapsed: true ,
   }).addTo(map);
-  /* Stamen colored  basemap tiles with labels */
-  var layer_googlemap = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}'', {
-      attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
+ 
+  
+  /* Stamen colored terrain basemap tiles with labels */
+  var terrain = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+  }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
+  controlLayers.addBaseLayer(terrain, 'map');
+    
+    // display Carto basemap tiles with light features and labels//
+    
+  var light = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    attribution: '&copy; <a href="https://leafletjs.com/">Leaflet</a>, &copy; <a href="https://www.linkedin.com/in/virangkana-sampun-9b1116203/">VIRANGKANA</a>'
   }).addTo(map); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-  controlLayers.addBaseLayer(layer_googlemap, 'Satellite');
+  controlLayers.addBaseLayer(light, 'Satellite');
 
-   
-        var layer_Globalforestcover2020 =  L.WMS.layer("https://ies-ows.jrc.ec.europa.eu/iforce/gfc2020/wms.py", "gfc2020", {
-            pane: 'pane_Globalforestcover2020_2',
-            format: 'image/png',
-            uppercase: true,
-            transparent: true,
-            continuousWorld : true,
-            tiled: true,
-            info_format: 'text/html',
-            opacity: 1,
-            attribution: '',
-        });
-        
-        }); // EDIT - insert or remove ".addTo(map)" before last semicolon to display by default
-  controlLayers.addBaseLayer(layer_Globalforestcover2020, 'global forest watch');
         </script>
     </body>
 </html>
