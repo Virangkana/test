@@ -39,6 +39,11 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
+              var controlLayers = L.control.layers( layer_googlemap_0, layer_Globalforestcover2020_1, {
+    position: "topright",
+    collapsed: true ,
+  }).addTo(map);
+ 
         map.createPane('pane_googlemap_0');
         map.getPane('pane_googlemap_0').style.zIndex = 400;
         var layer_googlemap_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
